@@ -23,23 +23,4 @@ public class SpringbootExampleApplication {
 	public Foo getFoo() {
 		return new Foo("bar");
 	}
-
-	@Bean
-	CommandLineRunner runner(CustomerRepository customerRepository) {
-		return args -> {
-			Customer alex = new Customer(
-					"alex",
-					"alex@gmail.com",
-					22
-			);
-
-			Customer jameela = new Customer(
-					"jameela",
-					"jameela@gmail.com",
-					19
-			);
-			List<Customer> customers = List.of(alex, jameela);
-			customerRepository.saveAll(customers);
-		};
-	}
 }

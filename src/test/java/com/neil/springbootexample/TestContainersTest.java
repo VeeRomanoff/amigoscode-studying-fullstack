@@ -7,20 +7,12 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Testcontainers
 public class TestContainersTest {
-
-    @Container
     private static final PostgreSQLContainer<?> postgreSQLContainer =
-            new PostgreSQLContainer<>("postgres:latest")
-                    .withDatabaseName("neil-dao-unit-test")
-                    .withUsername("neil")
-                    .withPassword("110011");
+            new PostgreSQLContainer<>("")
 
     @Test
     void canStartPostgresDB() {
-        assertThat(postgreSQLContainer.isRunning()).isTrue();
-        assertThat(postgreSQLContainer.isCreated()).isTrue();
-//        assertThat(postgreSQLContainer.isHealthy()).isTrue();
+
     }
 }

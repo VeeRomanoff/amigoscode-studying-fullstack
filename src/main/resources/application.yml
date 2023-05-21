@@ -3,16 +3,18 @@ server:
   error:
     include-message: always
 spring:
+  flyway:
+    locations: classpath:db/migration
   main:
     web-application-type: servlet
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5332/customer
+    url: jdbc:postgresql://localhost:5432/amigos-fullstack
     password: 110011
-    username: amigoscode
+    username: postgres
   jpa:
     hibernate:
-      ddl-auto: create-drop # БД каждый раз будет обновляться при запуске / остановке приложения
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
