@@ -37,37 +37,43 @@ public class CustomerService {
         }
 
         // add
-        customerDao.insertCustomer(new Customer(
+        Customer customer = new Customer(
                 customerRegistrationRequest.name(),
                 customerRegistrationRequest.email(),
-                customerRegistrationRequest.age())
+                customerRegistrationRequest.age()
         );
+
+        customerDao.insertCustomer(customer);
      }
 
      public void deleteCustomer(Integer id) {
+        if (!customerDao.existCustomerWithId(id)) {
+            throw new ResourceNotFoundException("customer with id [%s] not found".formatted(id));
+        }
+
         customerDao.deleteCustomer(id);
      }
 
-     public void updateCustomer(Integer id, CustomerUpdateRequest updateRequest) {
+     public void updateCustomer(Integer id, CustomerUpdateRequest updatedRequest) {
         Customer customer = getOneCustomer(id);
 
         boolean changes = false;
 
-        if (updateRequest.name() != null && !updateRequest.name().equals(customer.getName())) {
-            customer.setName(updateRequest.name());
+        if (updatedRequest.name() != null && !updatedRequest.name().equals(customer.getName())) {
+            customer.setName(updatedRequest.name());
             changes = true;
         }
 
-        if (updateRequest.age() != null && !updateRequest.age().equals(customer.getAge())) {
-            customer.setAge(updateRequest.age());
+        if (updatedRequest.age() != null && !updatedRequest.age().equals(customer.getAge())) {
+            customer.setAge(updatedRequest.age());
             changes = true;
         }
 
-        if (updateRequest.email() != null && !updateRequest.email().equals(customer.getEmail())) {
-            if (customerDao.exitsPersonWithEmail(updateRequest.email())) {
+        if (updatedRequest.email() != null && !updatedRequest.email().equals(customer.getEmail())) {
+            if (customerDao.exitsPersonWithEmail(updatedRequest.email())) {
                 throw new DuplicateResourceException("Email already taken");
             }
-            customer.setEmail(updateRequest.email());
+            customer.setEmail(updatedRequest.email());
             changes = true;
         }
 

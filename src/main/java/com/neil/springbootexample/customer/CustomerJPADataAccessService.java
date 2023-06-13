@@ -1,6 +1,5 @@
 package com.neil.springbootexample.customer;
 
-import com.neil.springbootexample.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,9 +18,9 @@ public class CustomerJPADataAccessService implements CustomerDao{
         return customerRepository.findAll();
     }
 
-
-    public Customer selectOneCustomer(Integer id) {
-       return customerRepository.findCustomerById(id);
+    @Override
+    public Customer selectOneCustomer(int id) {
+         return customerRepository.findCustomerById(id);
     }
 
     @Override
@@ -42,5 +41,10 @@ public class CustomerJPADataAccessService implements CustomerDao{
     @Override
     public void updateCustomer(Customer customer) {
         customerRepository.save(customer);
+    }
+
+    @Override
+    public boolean existCustomerWithId(Integer id) {
+        return customerRepository.existsCustomerById(id);
     }
 }

@@ -1,7 +1,6 @@
 package com.neil.springbootexample.customer;
 
 import jakarta.persistence.*;
-import org.springframework.data.repository.cdi.Eager;
 
 import java.util.Objects;
 
@@ -11,29 +10,31 @@ import java.util.Objects;
         uniqueConstraints = {
                 @UniqueConstraint(
                         name = "customer_email_unique",
-                        columnNames = "email")
+                        columnNames = "email"
+                )
         }
 )
 public class Customer {
 
     @Id
-    @SequenceGenerator(
-            name = "customer_id_sequence",
-            sequenceName = "customer_id_seq"
-    )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
             generator = "customer_id_seq"
     )
+    @SequenceGenerator(
+            name = "customer_id_seq",
+            sequenceName = "customer_id_seq",
+            allocationSize = 1
+    )
     private Integer id;
 
-    @Column(nullable = false, name = "name")
+    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, name = "email")
+    @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false, name = "age")
+    @Column(nullable = false)
     private Integer age;
 
     public Customer(Integer id, String name, String email, Integer age) {

@@ -6,7 +6,7 @@ import java.util.Optional;
 public interface CustomerDao {
     List<Customer> selectAllCustomers();
 
-    Customer selectOneCustomer(Integer id);
+    Customer selectOneCustomer(int id);
 
     void insertCustomer(Customer customer);
 
@@ -15,4 +15,5 @@ public interface CustomerDao {
     void deleteCustomer(Integer id);
 
     void updateCustomer(Customer customer);
+    boolean existCustomerWithId(Integer id);
 }

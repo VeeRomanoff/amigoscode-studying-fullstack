@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository("jdbc")
 public class CustomerJDBCDataAccessService implements CustomerDao {
@@ -23,16 +24,13 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
     }
 
     @Override
-    public Customer selectOneCustomer(Integer id) {
+    public Customer selectOneCustomer(int id) {
         String SQL = "SELECT * FROM customer WHERE id = ?";
 
-        return jdbcTemplate.query(
-                        SQL,
-                        new Object[]{id},
-                        new BeanPropertyRowMapper<>(Customer.class))
-                .stream()
-                .findAny()
-                .orElseThrow(() -> new ResourceNotFoundException("Customer with id [%s] not found".formatted(id)));
+       return jdbcTemplate.query(SQL, new Object[]{id}, new BeanPropertyRowMapper<>(Customer.class))
+               .stream()
+               .findAny()
+               .orElseThrow(() -> new ResourceNotFoundException("Customer with id %s not found".formatted(id)));
     }
 
     @Override
@@ -55,8 +53,14 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
 
     @Override
     public void updateCustomer(Customer customer) {
-        String SQL = "UPDATE customer SET name = ?, age = ?, WHERE email = ?";
-        jdbcTemplate.update(SQL, customer.getName(), customer.getAge(), customer.getEmail());
+        String SQL = "UPDATE customer SET name = ?, age = ? WHERE id = ?";
+        jdbcTemplate.update(SQL, customer.getName(), customer.getAge(), customer.getId());
+    }
+
+    @Override
+    public boolean existCustomerWithId(Integer id) {
+        return selectAllCustomers().stream()
+                .anyMatch(cus -> cus.getId().equals(id));
     }
 }
 
