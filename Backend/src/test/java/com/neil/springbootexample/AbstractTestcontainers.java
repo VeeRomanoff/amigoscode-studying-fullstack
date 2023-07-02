@@ -3,7 +3,9 @@ package com.neil.springbootexample;
 import com.github.javafaker.Faker;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeAll;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -31,7 +33,7 @@ public abstract class AbstractTestcontainers {
             new PostgreSQLContainer<>("postgres:latest")
                     .withDatabaseName("customer-dao-unit-test")
                     .withUsername("customer")
-                    .withPassword("110011");
+                    .withPassword("sadrrainbow");
 
     @DynamicPropertySource
     private static void registerDataSourceProperties(DynamicPropertyRegistry registry) {

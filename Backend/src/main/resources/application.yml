@@ -10,7 +10,7 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5332/mydb
-    password: 110011
+    password: sadrrainbow
     username: smite
   jpa:
     hibernate:

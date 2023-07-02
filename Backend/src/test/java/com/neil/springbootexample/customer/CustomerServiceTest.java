@@ -81,6 +81,7 @@ class CustomerServiceTest {
         ArgumentCaptor<Customer> captor = ArgumentCaptor.forClass(
                 Customer.class
         );
+
         // verify that insertCustomer method was invoked  // we capture the value
         verify(customerDao).insertCustomer(captor.capture());
 

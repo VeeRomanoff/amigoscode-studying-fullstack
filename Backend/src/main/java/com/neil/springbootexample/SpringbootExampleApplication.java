@@ -17,9 +17,7 @@ public class SpringbootExampleApplication {
     }
 
     record Foo(String name) {
-    }
-
-    ;
+    };
 
     @Bean
     public Foo getFoo() {
