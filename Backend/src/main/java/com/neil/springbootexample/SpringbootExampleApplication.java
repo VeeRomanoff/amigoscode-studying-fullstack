@@ -16,6 +16,7 @@ public class SpringbootExampleApplication {
 
     public static void main(String[] args) {
 
+        
         SpringApplication.run(SpringbootExampleApplication.class, args);
     }
 
@@ -39,7 +40,6 @@ public class SpringbootExampleApplication {
                     emailAdress,
                     age
             );
-
             customerRepository.save(customer);
         };
     }
