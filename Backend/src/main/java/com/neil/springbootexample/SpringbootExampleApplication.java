@@ -39,8 +39,8 @@ public class SpringbootExampleApplication {
                     emailAdress,
                     age
             );
-
             customerRepository.save(customer);
         };
+
     }
 }
