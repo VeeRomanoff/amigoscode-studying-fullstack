@@ -42,7 +42,7 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
     @Override
     public boolean exitsPersonWithEmail(String email) {
         return selectAllCustomers().stream()
-                .anyMatch(c -> c.getEmail().equals(email));
+                .anyMatch(c -> c.getEmail().equals(c.getName()));
     }
 
     @Override
